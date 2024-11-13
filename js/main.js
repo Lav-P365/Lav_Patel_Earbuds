@@ -1,7 +1,31 @@
 (() => {
 
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.registerPlugin(ScrollToPlugin);
+  gsap.registerPlugin(ScrollToPlugin);
+
+    gsap.to(".hero-logo", {
+      duration: 5,
+      opacity: 1,
+      y: 0,
+      ease: "power3.out",
+      delay: 2,
+    });
+
+    gsap.from(".hero-title", {
+      duration: 2,
+      opacity: 1,
+      y: -150,
+      ease: "power3.out",
+      delay: 1,
+    });
+        
+  
+    gsap.to(".button", {
+      duration: 1,
+      opacity: 1,
+      y: -50,
+      ease: "power3.out",
+      delay: 3,
+    });
 
     const navLinks = document.querySelectorAll("#header nav ul li a");
 
@@ -16,30 +40,6 @@
         link.addEventListener("click", scrollLink);
     });
 
-    
-  gsap.to(".hero-logo", {
-    duration: 1,
-    opacity: 1,
-    y: 0,
-    ease: "power3.out",
-    delay: 0.3,
-  });
-      
-  gsap.to(".hero-title", {
-    duration: 1,
-    opacity: 1,
-    y: 0,
-    ease: "power3.out",
-    delay: 0.5,
-  });
-
-  gsap.to(".button", {
-    duration: 1,
-    opacity: 1,
-    y: 0,
-    ease: "power3.out",
-    delay: 0.9,
-  });
 
   document.querySelectorAll(".specification").forEach(function (button) {
     button.addEventListener("click", function () {
@@ -56,29 +56,24 @@
     
    // hotspots Selection
 
-   const jbl = document.querySelector("#jbl");
+   const model = document.querySelector("#model");
    const hotspots = document.querySelectorAll(".Hotspot");
  
-   const InfoBoxes = [
+   const infoBoxes = [
      {
-       title: "Quick Charging Technology",
-       text: "Utilize advanced charging technologies like Qualcomm Quick Charge, USB Power Delivery, or proprietary fast charging methods to ensure rapid charging",
-       image: "../images/hotspot.svg",
+       title: "Smart touch controls",
+       text: "Most smart touch controls use capacitive touch sensors, which detect electrical charge variations. ",
+       img: "../images/logo.png",
      },
      {
-       title: "Sound Quality",
-       text: "High-quality audio drivers for clear and balanced sound,Noise isolation or cancellation for a better listening experience",
-       image: "../images/hotspot.svg",
+       title: "Bluetooth 5.3, Faster Pairing",
+       text: "By reducing the time required to switch from idle to active, this feature can also speed up reconnections and improve the user experience.",
+       img: "../images/logo.png",
      },
      {
-       title: "Intuitive Control Mapping",
-       text: "Design intuitive tap mappings, such as double-tap for play/pause, triple-tap for the next track, and so on. Make it easy for users to remember and use these controls.",
-       image: "../images/hotspot.svg",
-     },
-     {
-       title: "Transparency Mode",
-       text: "a transparency mode that allows external sounds to pass through for safety or awareness.",
-       image: "../images/hotspot.svg",
+       title: "IP7 Water & Sweat Resistant",
+       text: "Devices with IP7 are tested for immersion in up to 1 meter of water for up to 30 minutes without sustaining damage.",
+       img: "../images/logo.png",
      },
    ];
  
@@ -89,39 +84,45 @@
    }
  
    function loadInfo() {
-     InfoBoxes.forEach((infoBox, index) => {
-       let selected = document.querySelector(`#hotspot-${index + 1}`);
- 
-       const titleElement = document.createElement("h2");
-       titleElement.textContent = infoBox.title;
- 
-       const textElement = document.createElement("p");
-       textElement.textContent = infoBox.text;
- 
-       selected.appendChild(titleElement);
-       selected.appendChild(textElement);
-     });
-   }
-   loadInfo();
- 
-   function showInfo() {
-     let selected = document.querySelector(`#${this.slot}`);
-     gsap.to(selected, 1, { autoAlpha: 1 });
-   }
- 
-   function hideInfo() {
-     let selected = document.querySelector(`#${this.slot}`);
-     gsap.to(selected, 1, { autoAlpha: 0 });
-   }
- 
-   //Event Listener
-   model.addEventListener("load", modelLoaded);
- 
-   hotspots.forEach(function (hotspot) {
-     hotspot.addEventListener("mouseover", showInfo);
-     hotspot.addEventListener("mouseout", hideInfo);
-   });
- 
-   //end-hotspots
 
+    infoBoxes.forEach((infoBox, index) => {
+  
+      let selected = document.querySelector(`#hotspot-${index+1}`);
+  
+      const titleElement = document.createElement("h2");
+      titleElement.textContent = infoBox.title;
+
+      const textElement = document.createElement("p");
+      textElement.textContent = infoBox.text;
+
+      const imgElement = document.createElement("img");
+      imgElement.src = infoBox.image;
+
+      selected.appendChild(titleElement);
+      selected.appendChild(textElement);
+      selected.appendChild(imgElement);
+
+    });
+
+  }
+
+  loadInfo();
+
+  function showInfo() {
+    let selected = document.querySelector(`#${this.slot}`);
+    gsap.to(selected, 1, { autoAlpha: 1 });
+  }
+
+  function hideInfo() {
+    let selected = document.querySelector(`#${this.slot}`);
+    gsap.to(selected, 1, { autoAlpha: 0 });
+  }
+
+  //Event listeners
+
+  hotspots.forEach(function (hotspot) {
+    hotspot.addEventListener("mouseover", showInfo);
+    hotspot.addEventListener("mouseout", hideInfo);
+  });
+ 
 })();
